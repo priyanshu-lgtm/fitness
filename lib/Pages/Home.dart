@@ -80,58 +80,62 @@ class HomePage extends StatelessWidget {
                     fontStyle: FontStyle.italic,
                     fontSize: 25)),
           ),
-          Column(
-              children: [ListView.separated(
-                shrinkWrap: true,
-                itemCount: popular.length,
-                // scrollDirection: false,
-                separatorBuilder: (context, index) => const SizedBox(height: 25),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 24, right: 24),
-                    child: Container(
-                      height: 115,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color(0xff000000).withOpacity(.21),
-                                blurRadius: 40,
-                                spreadRadius: 0.0)
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SvgPicture.asset(popular[index].iconPath,width: 60,height: 60),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(popular[index].itemName,
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 18)),
-                              Text(popular[index].quality,
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 18)),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              )]),
+          getPopular(),
           SizedBox(height: 20,)
         ],
       ),
     );
+  }
+
+  Column getPopular(){
+    return Column(
+        children: [ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: popular.length,
+          separatorBuilder: (context, index) => const SizedBox(height: 25),
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 24, right: 24),
+              child: Container(
+                height: 115,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: const Color(0xff000000).withOpacity(.21),
+                          blurRadius: 40,
+                          spreadRadius: 0.0)
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SvgPicture.asset(popular[index].iconPath,width: 60,height: 60),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(popular[index].itemName,
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                fontSize: 18)),
+                        Text(popular[index].quality,
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                fontSize: 18)),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        )]);
   }
 
   Container getReccomendation() {
